@@ -13,14 +13,12 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 
 import Pizza from "../graphics/Pizza";
 import Row from "./Row";
-import RegisterForm from "./RegisterForm";
 import config from "../config/config";
-import LoginForm from "./LoginForm";
 
 const styles = theme => ({
   root: {
-    marginLeft: 32,
-    marginRight: 32,
+    paddingLeft: 32,
+    paddingRight: 32,
     marginTop: 32,
     marginBottom: 40,
     maxWidth: 800,
@@ -39,9 +37,14 @@ const styles = theme => ({
 });
 
 export default withStyles(styles)(
-  ({ classes, username, admin, cartQuantity }) => {
-    const [loginOpen, setLoginOpen] = React.useState(false);
-    const [registerOpen, setRegisterOpen] = React.useState(false);
+  ({
+    classes,
+    username,
+    admin,
+    cartQuantity,
+    setRegisterOpen,
+    setLoginOpen
+  }) => {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const isMenuOpen = Boolean(anchorEl);
 
@@ -109,11 +112,6 @@ export default withStyles(styles)(
           )}
         </Row>
         {renderMenu}
-        <RegisterForm
-          open={registerOpen}
-          onClose={() => setRegisterOpen(false)}
-        />
-        <LoginForm open={loginOpen} onClose={() => setLoginOpen(false)} />
       </>
     );
   }

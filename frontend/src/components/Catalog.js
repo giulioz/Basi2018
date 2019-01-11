@@ -8,7 +8,8 @@ import {
   ListItemSecondaryAction,
   IconButton,
   InputBase,
-  Toolbar
+  Toolbar,
+  Divider
 } from "@material-ui/core";
 import { fade } from "@material-ui/core/styles/colorManipulator";
 import PlusIcon from "@material-ui/icons/Add";
@@ -63,7 +64,7 @@ const styles = theme => ({
   }
 });
 
-export default withStyles(styles)(({ classes, catalogItems }) => {
+export default withStyles(styles)(({ classes, catalogItems, onAddToCart }) => {
   const [search, setSearch] = useState("");
   const filteredItems =
     search && search.length > 0
@@ -97,6 +98,7 @@ export default withStyles(styles)(({ classes, catalogItems }) => {
           />
         </div>
       </Toolbar>
+      <Divider />
       <List>
         {filteredItems.map(item => (
           <ListItem key={item.name}>
@@ -105,7 +107,10 @@ export default withStyles(styles)(({ classes, catalogItems }) => {
               secondary={item.ingredients.join(", ")}
             />
             <ListItemSecondaryAction>
-              <IconButton color="inherit">
+              <IconButton
+                color="inherit"
+                onClick={() => onAddToCart(item.name)}
+              >
                 <PlusIcon />
               </IconButton>
             </ListItemSecondaryAction>

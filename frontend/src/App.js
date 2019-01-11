@@ -29,5 +29,16 @@ export default withStyleConfig()(() => {
     }
   ]);
 
-  return <Routing {...{ currentUser, cart, catalogItems }} />;
+  return (
+    <Routing
+      {...{
+        currentUser,
+        setCurrentUser,
+        cart,
+        setCart,
+        catalogItems,
+        setCatalogItems
+      }}
+    />
+  );
 });

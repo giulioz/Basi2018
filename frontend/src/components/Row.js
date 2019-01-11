@@ -1,5 +1,5 @@
-import { withStyles } from "@material-ui/core/styles";
 import React from "react";
+import { withStyles } from "@material-ui/core/styles";
 
 const styles = {
   root: {
@@ -9,12 +9,16 @@ const styles = {
 
 class Row extends React.PureComponent {
   render() {
-    const { classes, children, className, align, justify } = this.props;
+    const { classes, children, className, align, justify, grow } = this.props;
 
     return (
       <div
         className={`${classes.root} ${className || ""}`}
-        style={{ alignItems: align, justifyContent: justify }}
+        style={{
+          alignItems: align,
+          justifyContent: justify,
+          flexGrow: grow ? 1 : 0
+        }}
       >
         {children}
       </div>
