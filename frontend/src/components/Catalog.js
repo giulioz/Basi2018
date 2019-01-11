@@ -8,19 +8,23 @@ import {
   ListItemSecondaryAction,
   IconButton,
   InputBase,
-  Toolbar,
-  Divider
+  Chip
 } from "@material-ui/core";
 import { fade } from "@material-ui/core/styles/colorManipulator";
 import PlusIcon from "@material-ui/icons/Add";
 import SearchIcon from "@material-ui/icons/Search";
+import Row from "./Row";
 
 const styles = theme => ({
   root: {
-    minWidth: 600
+    maxWidth: 600,
+    width: "100%"
   },
   title: {
     flexGrow: 1
+  },
+  titleContainer: {
+    marginBottom: theme.spacing.unit
   },
   search: {
     position: "relative",
@@ -28,13 +32,6 @@ const styles = theme => ({
     backgroundColor: fade(theme.palette.primary.main, 0.05),
     "&:hover": {
       backgroundColor: fade(theme.palette.primary.main, 0.15)
-    },
-    marginRight: theme.spacing.unit * 2,
-    marginLeft: 0,
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: theme.spacing.unit * 3,
-      width: "auto"
     }
   },
   searchIcon: {
@@ -64,59 +61,72 @@ const styles = theme => ({
   }
 });
 
-export default withStyles(styles)(({ classes, catalogItems, onAddToCart }) => {
-  const [search, setSearch] = useState("");
-  const filteredItems =
-    search && search.length > 0
-      ? catalogItems.filter(
-          item =>
-            item.name.toLowerCase().includes(search.toLowerCase()) ||
-            item.ingredients.filter(ing =>
-              ing.toLowerCase().includes(search.toLowerCase())
-            ).length > 0
-        )
-      : catalogItems;
+export default withStyles(styles)(
+  ({ classes, catalogItems, cart, onAddToCart, onClearCartItem }) => {
+    const [search, setSearch] = useState("");
+    const filteredItems =
+      search && search.length > 0
+        ? catalogItems.filter(
+            item =>
+              item.name.toLowerCase().includes(search.toLowerCase()) ||
+              item.ingredients.filter(ing =>
+                ing.toLowerCase().includes(search.toLowerCase())
+              ).length > 0
+          )
+        : catalogItems;
 
-  return (
-    <div className={classes.root}>
-      <Toolbar>
-        <Typography variant="h4" className={classes.title}>
-          Catalogo
-        </Typography>{" "}
-        <div className={classes.search}>
-          <div className={classes.searchIcon}>
-            <SearchIcon />
-          </div>
-          <InputBase
-            placeholder="Cerca…"
-            classes={{
-              root: classes.inputRoot,
-              input: classes.inputInput
-            }}
-            value={search}
-            onChange={e => setSearch(e.target.value)}
-          />
-        </div>
-      </Toolbar>
-      <Divider />
-      <List>
-        {filteredItems.map(item => (
-          <ListItem key={item.name}>
-            <ListItemText
-              primary={item.name}
-              secondary={item.ingredients.join(", ")}
+    const aggregatedCart = filteredItems.map(item => ({
+      ...item,
+      count: (cart && cart.filter(ci => ci.name === item.name).length) || 0
+    }));
+
+    return (
+      <div className={classes.root}>
+        <Row align="center" className={classes.titleContainer}>
+          <Typography variant="h4" className={classes.title}>
+            Catalogo
+          </Typography>
+          <div className={classes.search}>
+            <div className={classes.searchIcon}>
+              <SearchIcon />
+            </div>
+            <InputBase
+              placeholder="Cerca…"
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput
+              }}
+              value={search}
+              onChange={e => setSearch(e.target.value)}
             />
-            <ListItemSecondaryAction>
-              <IconButton
-                color="inherit"
-                onClick={() => onAddToCart(item.name)}
-              >
-                <PlusIcon />
-              </IconButton>
-            </ListItemSecondaryAction>
-          </ListItem>
-        ))}
-      </List>
-    </div>
-  );
-});
+          </div>
+        </Row>
+        <List>
+          {aggregatedCart.map(item => (
+            <ListItem key={item.name}>
+              <ListItemText
+                primary={item.name}
+                secondary={item.ingredients.join(", ")}
+              />
+              <ListItemSecondaryAction>
+                {item.count > 0 && (
+                  <Chip
+                    label={item.count}
+                    onDelete={() => onClearCartItem(item.name)}
+                    color="primary"
+                  />
+                )}
+                <IconButton
+                  color="inherit"
+                  onClick={() => onAddToCart(item.name)}
+                >
+                  <PlusIcon />
+                </IconButton>
+              </ListItemSecondaryAction>
+            </ListItem>
+          ))}
+        </List>
+      </div>
+    );
+  }
+);

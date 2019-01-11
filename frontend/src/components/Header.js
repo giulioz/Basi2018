@@ -79,7 +79,7 @@ export default withStyles(styles)(
             <>
               <Typography variant="h6">{username}</Typography>
               <IconButton color="inherit">
-                <Badge badgeContent={cartQuantity}>
+                <Badge badgeContent={cartQuantity} color="primary">
                   <ShoppingCartIcon />
                 </Badge>
               </IconButton>

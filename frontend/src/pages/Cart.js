@@ -19,14 +19,7 @@ export default ({
 
   const handleAddToCart = name => {
     if (currentUser) {
-      setCart([...cart, { ...catalogItems.find(i => i.name === name) }]);
-    } else {
-      setLoginOpen(true);
-    }
-  };
-  const handleClearCartItem = name => {
-    if (currentUser) {
-      setCart(cart.filter(ci => ci.name !== name));
+      setCart([...cart, catalogItems.find(i => (i.name = name))]);
     } else {
       setLoginOpen(true);
     }
@@ -62,7 +55,6 @@ export default ({
         catalogItems={catalogItems}
         cart={cart}
         onAddToCart={handleAddToCart}
-        onClearCartItem={handleClearCartItem}
       />
     </>
   );
