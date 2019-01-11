@@ -1,11 +1,13 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
-export default () => {
+import Index from "./pages/Index";
+
+export default ({ ...appState }) => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/" exact component={() => "test"} />
+        <Route path="/" exact component={Index} {...appState} />
       </Switch>
     </BrowserRouter>
   );
