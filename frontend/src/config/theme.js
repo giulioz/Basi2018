@@ -17,7 +17,7 @@ export const globalStyles = {
 export const GlobalTheme = createMuiTheme({
   typography: { useNextVariants: true },
   palette: {
-    primary: { main: "#000" }
+    primary: { main: "rgba(0, 0, 0, 0.87)" }
     // type: "dark"
   },
   drawerWidth: 240

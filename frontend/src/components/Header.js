@@ -22,8 +22,8 @@ const styles = theme => ({
     marginLeft: 32,
     marginRight: 32,
     marginTop: 32,
-    marginBottom: 12,
-    maxWidth: 1000,
+    marginBottom: 40,
+    maxWidth: 800,
     width: "100%"
   },
   logo: {

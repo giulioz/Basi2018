@@ -7,7 +7,7 @@ export default ({ ...appState }) => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/" exact component={Index} {...appState} />
+        <Route path="/" exact render={() => <Index {...appState} />} />
       </Switch>
     </BrowserRouter>
   );

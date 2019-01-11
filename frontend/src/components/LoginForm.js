@@ -6,7 +6,8 @@ import {
   Button,
   TextField,
   DialogActions,
-  withStyles
+  withStyles,
+  DialogContentText
 } from "@material-ui/core";
 
 import { loginUser } from "../api/user";
@@ -25,21 +26,30 @@ const styles = theme => ({
 export default withStyles(styles)(({ open, onLogin, onClose, classes }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
 
   const handleSubmit = e => {
-    e.preventDefault();
+    e && e.preventDefault();
+
     if (loginUser(username, password)) {
       onLogin();
+    } else {
+      setError(true);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Dialog open={open} onClose={onClose}>
+    <Dialog open={open} onClose={onClose}>
+      <form onSubmit={handleSubmit}>
         <DialogTitle className={classes.title}>
           Inserisci le tue Credenziali
         </DialogTitle>
         <DialogContent>
+          {error && (
+            <DialogContentText color="error">
+              Credenziali errate! Riprova.
+            </DialogContentText>
+          )}
           <Column>
             <TextField
               autoFocus
@@ -52,7 +62,6 @@ export default withStyles(styles)(({ open, onLogin, onClose, classes }) => {
               className={classes.field}
             />
             <TextField
-              autoFocus
               margin="dense"
               label="Password"
               type="password"
@@ -67,11 +76,11 @@ export default withStyles(styles)(({ open, onLogin, onClose, classes }) => {
           <Button onClick={onClose} color="primary">
             Annulla
           </Button>
-          <Button color="primary" variant="contained" type="submit">
+          <Button color="primary" variant="contained" onClick={handleSubmit}>
             Entra
           </Button>
         </DialogActions>
-      </Dialog>
-    </form>
+      </form>
+    </Dialog>
   );
 });

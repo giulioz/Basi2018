@@ -34,7 +34,7 @@ export default withStyles(styles)(({ open, onClose, classes }) => {
   const [phone, setPhone] = useState("");
 
   const handleSubmit = e => {
-    e.preventDefault();
+    e && e.preventDefault();
 
     registerUser({
       username,
@@ -48,8 +48,8 @@ export default withStyles(styles)(({ open, onClose, classes }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Dialog open={open} onClose={onClose} className={classes.root}>
+    <Dialog open={open} onClose={onClose} className={classes.root}>
+      <form onSubmit={handleSubmit}>
         <DialogTitle className={classes.title}>
           Iscriviti a {config.siteName}
         </DialogTitle>
@@ -70,7 +70,6 @@ export default withStyles(styles)(({ open, onClose, classes }) => {
                 className={classes.field}
               />
               <TextField
-                autoFocus
                 margin="dense"
                 label="Password"
                 type="password"
@@ -82,7 +81,6 @@ export default withStyles(styles)(({ open, onClose, classes }) => {
             </Row>
             <Row>
               <TextField
-                autoFocus
                 margin="dense"
                 label="Nome"
                 type="text"
@@ -92,7 +90,6 @@ export default withStyles(styles)(({ open, onClose, classes }) => {
                 className={classes.field}
               />
               <TextField
-                autoFocus
                 margin="dense"
                 label="Cognome"
                 type="text"
@@ -103,7 +100,6 @@ export default withStyles(styles)(({ open, onClose, classes }) => {
               />
             </Row>
             <TextField
-              autoFocus
               margin="dense"
               label="Indirizzo"
               type="text"
@@ -113,7 +109,6 @@ export default withStyles(styles)(({ open, onClose, classes }) => {
               className={classes.field}
             />
             <TextField
-              autoFocus
               margin="dense"
               label="Telefono"
               type="text"
@@ -128,11 +123,11 @@ export default withStyles(styles)(({ open, onClose, classes }) => {
           <Button onClick={onClose} color="primary">
             Annulla
           </Button>
-          <Button color="primary" variant="contained" type="submit">
+          <Button color="primary" variant="contained" onClick={handleSubmit}>
             Iscriviti
           </Button>
         </DialogActions>
-      </Dialog>
-    </form>
+      </form>
+    </Dialog>
   );
 });
