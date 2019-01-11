@@ -7,9 +7,13 @@ export default withStyleConfig()(() => {
   const [currentUser, setCurrentUser] = useState(
     JSON.parse(localStorage.getItem("currentUser")) || null
   );
-  
+
   const [cart, setCart] = useState(
     JSON.parse(localStorage.getItem("cart")) || []
+  );
+
+  const [orders, setOrders] = useState(
+    JSON.parse(localStorage.getItem("orders")) || []
   );
 
   const [catalogItems, setCatalogItems] = useState(
@@ -41,9 +45,10 @@ export default withStyleConfig()(() => {
     () => {
       localStorage.setItem("currentUser", JSON.stringify(currentUser));
       localStorage.setItem("cart", JSON.stringify(cart));
+      localStorage.setItem("orders", JSON.stringify(orders));
       localStorage.setItem("catalogItems", JSON.stringify(catalogItems));
     },
-    [cart, catalogItems, currentUser]
+    [cart, catalogItems, currentUser, orders]
   );
 
   return (
@@ -53,6 +58,8 @@ export default withStyleConfig()(() => {
         setCurrentUser,
         cart,
         setCart,
+        orders,
+        setOrders,
         catalogItems,
         setCatalogItems
       }}

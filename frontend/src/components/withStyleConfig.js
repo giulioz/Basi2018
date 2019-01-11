@@ -1,5 +1,8 @@
 import { CssBaseline, MuiThemeProvider, withStyles } from "@material-ui/core";
 import React, { PureComponent } from "react";
+import { MuiPickersUtilsProvider } from "material-ui-pickers";
+import DateFnsUtils from "@date-io/date-fns";
+import itLocale from "date-fns/locale/it";
 
 import { globalStyles, GlobalTheme } from "../config/theme";
 
@@ -20,7 +23,9 @@ export default function withStyleConfig() {
           <MuiThemeProvider theme={GlobalTheme}>
             <CssBaseline>
               <GlobalStyled>
-                <Component />
+                <MuiPickersUtilsProvider utils={DateFnsUtils} locale={itLocale}>
+                  <Component />
+                </MuiPickersUtilsProvider>
               </GlobalStyled>
             </CssBaseline>
           </MuiThemeProvider>

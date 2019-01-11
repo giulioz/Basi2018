@@ -34,6 +34,8 @@ export default withStyles(styles)(
     setCart,
     catalogItems,
     setCatalogItems,
+    orders,
+    setOrders,
     classes
   }) => {
     const [loginOpen, setLoginOpen] = React.useState(false);
@@ -47,6 +49,7 @@ export default withStyles(styles)(
         setLoginOpen(true);
       }
     };
+
     const handleClearCartItem = name => {
       if (currentUser) {
         setCart(cart.filter(ci => ci.name !== name));
@@ -59,7 +62,12 @@ export default withStyles(styles)(
       setCurrentUser(getUser(username));
     };
 
-    const total = cart.reduce((sf, item) => item + sf.price, 0);
+    const handleOrder = order => {
+      setOrders([...orders, { ...order }]);
+      setCart([]);
+    };
+
+    const total = cart.reduce((sf, item) => item.price + sf, 0);
 
     return (
       <>
@@ -74,7 +82,12 @@ export default withStyles(styles)(
             onClose={() => setRegisterOpen(false)}
             onLogin={handleLogin}
           />
-          <OrderForm open={orderOpen} onClose={() => setOrderOpen(false)} />
+          <OrderForm
+            user={currentUser}
+            open={orderOpen}
+            onClose={() => setOrderOpen(false)}
+            onOrder={handleOrder}
+          />
         </>
 
         <Header
@@ -85,20 +98,26 @@ export default withStyles(styles)(
           setLoginOpen={setLoginOpen}
           onLogout={() => setCurrentUser(null)}
         />
+
         <Catalog
           catalogItems={catalogItems}
           cart={cart}
           onAddToCart={handleAddToCart}
           onClearCartItem={handleClearCartItem}
         />
+
         <Divider className={classes.divider} />
         <Row className={classes.end}>
           <Column>
             <Typography variant="h6">
               <strong>Totale:</strong> € {total}
             </Typography>
-          </Column>{" "}
-          <Button color="primary" variant="contained">
+          </Column>
+          <Button
+            color="primary"
+            variant="contained"
+            onClick={() => setOrderOpen(true)}
+          >
             Ordina
           </Button>
         </Row>

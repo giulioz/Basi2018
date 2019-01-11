@@ -3,7 +3,8 @@ import { withStyles } from "@material-ui/core/styles";
 
 const styles = {
   root: {
-    display: "flex"
+    display: "flex",
+    flexGrow: 1
   }
 };
 
