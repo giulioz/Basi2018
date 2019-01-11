@@ -7,9 +7,9 @@ export const globalStyles = {
       overscrollBehaviorY: "none"
     },
     "#root": {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center"
+      // display: "flex",
+      // flexDirection: "column",
+      // alignItems: "center"
     }
   }
 };

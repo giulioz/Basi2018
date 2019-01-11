@@ -7,58 +7,23 @@ import {
   ListItemText,
   ListItemSecondaryAction,
   IconButton,
-  InputBase,
   Chip
 } from "@material-ui/core";
-import { fade } from "@material-ui/core/styles/colorManipulator";
 import PlusIcon from "@material-ui/icons/Add";
-import SearchIcon from "@material-ui/icons/Search";
+import ArrowBackIcon from "@material-ui/icons/ChevronLeft";
 import Row from "./Row";
+import { Link } from "react-router-dom";
 
 const styles = theme => ({
   root: {
     maxWidth: 600,
-    width: "100%",
-    margin: "auto"
+    width: "100%"
   },
   title: {
     flexGrow: 1
   },
   titleContainer: {
     marginBottom: theme.spacing.unit
-  },
-  search: {
-    position: "relative",
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.primary.main, 0.05),
-    "&:hover": {
-      backgroundColor: fade(theme.palette.primary.main, 0.15)
-    }
-  },
-  searchIcon: {
-    right: 0,
-    width: theme.spacing.unit * 9,
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  inputRoot: {
-    color: "inherit",
-    width: "100%"
-  },
-  inputInput: {
-    paddingTop: theme.spacing.unit,
-    paddingRight: theme.spacing.unit,
-    paddingBottom: theme.spacing.unit,
-    paddingLeft: theme.spacing.unit * 4,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("md")]: {
-      width: 200
-    }
   }
 });
 
@@ -84,23 +49,12 @@ export default withStyles(styles)(
     return (
       <div className={classes.root}>
         <Row align="center" className={classes.titleContainer}>
+          <IconButton component={Link} to="/" color="inherit">
+            <ArrowBackIcon />
+          </IconButton>
           <Typography variant="h4" className={classes.title}>
-            Catalogo
+            Il tuo Carrello
           </Typography>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Cerca…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput
-              }}
-              value={search}
-              onChange={e => setSearch(e.target.value)}
-            />
-          </div>
         </Row>
         <List>
           {aggregatedCart.map(item => (

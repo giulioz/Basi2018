@@ -10,6 +10,7 @@ import {
 } from "@material-ui/core";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import { Link } from "react-router-dom";
 
 import Pizza from "../graphics/Pizza";
 import Row from "./Row";
@@ -22,7 +23,14 @@ const styles = theme => ({
     marginTop: 32,
     marginBottom: 40,
     maxWidth: 800,
-    width: "100%"
+    width: "100%",
+    margin: "auto"
+  },
+  link: {
+    display: "flex",
+    alignItems: "center",
+    textDecoration: "none",
+    flexGrow: 1
   },
   logo: {
     fill: theme.palette.text.primary,
@@ -43,13 +51,19 @@ export default withStyles(styles)(
     admin,
     cartQuantity,
     setRegisterOpen,
-    setLoginOpen
+    setLoginOpen,
+    onLogout
   }) => {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const isMenuOpen = Boolean(anchorEl);
 
     const handleMenuClose = () => {
       setAnchorEl(null);
+    };
+
+    const handleLogout = () => {
+      onLogout();
+      handleMenuClose();
     };
 
     const renderMenu = (
@@ -60,21 +74,29 @@ export default withStyles(styles)(
         open={isMenuOpen}
         onClose={handleMenuClose}
       >
-        <MenuItem onClick={handleMenuClose}>I tuoi Ordini</MenuItem>
+        <MenuItem onClick={handleMenuClose} component={Link} to="orders">
+          I tuoi Ordini
+        </MenuItem>
         {admin && (
-          <MenuItem onClick={handleMenuClose}>Amministrazione</MenuItem>
+          <MenuItem onClick={handleMenuClose} component={Link} to="admin">
+            Amministrazione
+          </MenuItem>
         )}
-        <MenuItem onClick={handleMenuClose}>Esci</MenuItem>
+        <MenuItem onClick={handleLogout} component={Link} to="/">
+          Esci
+        </MenuItem>
       </Menu>
     );
 
     return (
       <>
         <Row className={classes.root} align="center">
-          <Pizza width={80} className={classes.logo} />
-          <Typography variant="h2" className={classes.title}>
-            {config.siteName}
-          </Typography>
+          <Link className={classes.link} to="/">
+            <Pizza width={80} className={classes.logo} />
+            <Typography variant="h2" className={classes.title}>
+              {config.siteName}
+            </Typography>
+          </Link>
           {username ? (
             <>
               <Typography variant="h6">{username}</Typography>

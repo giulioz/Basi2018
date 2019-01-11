@@ -9,7 +9,15 @@ const styles = {
 
 class Row extends React.PureComponent {
   render() {
-    const { classes, children, className, align, justify, grow } = this.props;
+    const {
+      classes,
+      children,
+      className,
+      align,
+      justify,
+      grow,
+      style
+    } = this.props;
 
     return (
       <div
@@ -17,7 +25,8 @@ class Row extends React.PureComponent {
         style={{
           alignItems: align,
           justifyContent: justify,
-          flexGrow: grow ? 1 : 0
+          flexGrow: grow ? 1 : 0,
+          ...style
         }}
       >
         {children}

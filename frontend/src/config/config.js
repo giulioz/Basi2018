@@ -1,3 +1,3 @@
 export default {
-  siteName: "L' Alternativa"
+  siteName: "Alternativa"
 };

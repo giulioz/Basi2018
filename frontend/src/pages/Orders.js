@@ -1,9 +1,9 @@
 import React from "react";
 
 import Header from "../components/Header";
-import Catalog from "../components/Catalog";
 import LoginForm from "../components/LoginForm";
 import RegisterForm from "../components/RegisterForm";
+import Orders from "../components/Orders";
 import { getUser } from "../api/user";
 
 export default ({
@@ -19,7 +19,14 @@ export default ({
 
   const handleAddToCart = name => {
     if (currentUser) {
-      setCart([...cart, catalogItems.find(i => (i.name = name))]);
+      setCart([...cart, { ...catalogItems.find(i => i.name === name) }]);
+    } else {
+      setLoginOpen(true);
+    }
+  };
+  const handleClearCartItem = name => {
+    if (currentUser) {
+      setCart(cart.filter(ci => ci.name !== name));
     } else {
       setLoginOpen(true);
     }
@@ -51,10 +58,11 @@ export default ({
         setRegisterOpen={setRegisterOpen}
         setLoginOpen={setLoginOpen}
       />
-      <Catalog
+      <Orders
         catalogItems={catalogItems}
         cart={cart}
         onAddToCart={handleAddToCart}
+        onClearCartItem={handleClearCartItem}
       />
     </>
   );
