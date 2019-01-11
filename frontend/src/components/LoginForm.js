@@ -32,7 +32,7 @@ export default withStyles(styles)(({ open, onLogin, onClose, classes }) => {
     e && e.preventDefault();
 
     if (loginUser(username, password)) {
-      onLogin();
+      onLogin(username);
     } else {
       setError(true);
     }

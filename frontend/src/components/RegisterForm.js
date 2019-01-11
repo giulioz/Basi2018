@@ -25,7 +25,7 @@ const styles = theme => ({
   }
 });
 
-export default withStyles(styles)(({ open, onClose, classes }) => {
+export default withStyles(styles)(({ open, onClose, onLogin, classes }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -44,6 +44,7 @@ export default withStyles(styles)(({ open, onClose, classes }) => {
       address,
       phone
     });
+    onLogin(username);
     onClose();
   };
 

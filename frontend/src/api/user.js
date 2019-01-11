@@ -18,5 +18,9 @@ export const registerUser = ({
   });
 };
 
+export const getUser = username => {
+  users.find(u => u.username === username);
+};
+
 export const loginUser = (username, password) =>
   users.find(u => u.username === username && u.password === password);

@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import Catalog from "../components/Catalog";
 import LoginForm from "../components/LoginForm";
 import RegisterForm from "../components/RegisterForm";
+import { getUser } from "../api/user";
 
 export default ({
   currentUser,
@@ -18,18 +19,27 @@ export default ({
 
   const handleAddToCart = name => {
     if (currentUser) {
-      cart.push(catalogItems.find(i => (i.name = name)));
+      setCart([...cart, catalogItems.find(i => (i.name = name))]);
     } else {
       setLoginOpen(true);
     }
   };
 
+  const handleLogin = username => {
+    setCurrentUser(getUser(username));
+  };
+
   return (
     <>
-      <LoginForm open={loginOpen} onClose={() => setLoginOpen(false)} />
+      <LoginForm
+        open={loginOpen}
+        onClose={() => setLoginOpen(false)}
+        onLogin={handleLogin}
+      />
       <RegisterForm
         open={registerOpen}
         onClose={() => setRegisterOpen(false)}
+        onLogin={handleLogin}
       />
       <Header
         username={currentUser && `${currentUser.name} ${currentUser.surname}`}
