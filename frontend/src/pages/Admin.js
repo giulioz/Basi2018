@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import classNames from "classnames";
 
+import { Link, Route, Switch } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -10,7 +11,6 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
 import { ListItem, ListItemText, List, ListItemIcon } from "@material-ui/core";
-import { Link } from "react-router-dom";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import LocalPizzaIcon from "@material-ui/icons/LocalPizza";
 import LocalFloristIcon from "@material-ui/icons/LocalFlorist";
@@ -19,6 +19,8 @@ import PeopleIcon from "@material-ui/icons/People";
 
 import Column from "../components/Column";
 import Row from "../components/Row";
+import PizzasView from "../components/PizzasView";
+import config from "../config/config";
 
 const styles = theme => ({
   toolbarIcon: {
@@ -81,104 +83,118 @@ const styles = theme => ({
       duration: theme.transitions.duration.enteringScreen
     })
   },
-  divider: {
-    width: "100%",
-    maxWidth: 600,
-    marginTop: theme.spacing.unit * 4,
-    marginBottom: theme.spacing.unit * 2,
-    marginLeft: "auto",
-    marginRight: "auto"
+  content: {
+    flexGrow: 1,
+    height: "100vh",
+    overflow: "auto"
   },
-  end: {
-    width: "100%",
-    maxWidth: 600,
-    margin: "auto"
-  }
+  appBarSpacer: theme.mixins.toolbar
 });
 
-export default withStyles(styles)(({ classes }) => {
-  const [drawerOpen, setDrawerOpen] = useState(true);
+export default withStyles(styles)(
+  ({
+    currentUser,
+    setCurrentUser,
+    cart,
+    setCart,
+    catalogItems,
+    setCatalogItems,
+    orders,
+    setOrders,
+    classes
+  }) => {
+    const [drawerOpen, setDrawerOpen] = useState(true);
 
-  return (
-    <Row style={{ height: "100%" }}>
-      <Column>
-        <AppBar
-          position="absolute"
-          className={classNames(
-            classes.appBar,
-            drawerOpen && classes.appBarShift
-          )}
-        >
-          <Toolbar disableGutters={!drawerOpen} className={classes.toolbar}>
-            <IconButton
-              color="inherit"
-              onClick={() => setDrawerOpen(!drawerOpen)}
-              className={classNames(
-                classes.menuButton,
-                drawerOpen && classes.menuButtonHidden
-              )}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography
-              component="h1"
-              variant="h6"
-              color="inherit"
-              noWrap
-              className={classes.title}
-            >
-              ABC
-            </Typography>
-          </Toolbar>
-        </AppBar>
-        <Row grow>
-          <Drawer
-            variant="permanent"
-            classes={{
-              paper: classNames(
-                classes.drawerPaper,
-                !drawerOpen && classes.drawerPaperClose
-              )
-            }}
-            open={drawerOpen}
+    return (
+      <Row style={{ height: "100%" }}>
+        <Column>
+          <AppBar
+            position="absolute"
+            className={classNames(
+              classes.appBar,
+              drawerOpen && classes.appBarShift
+            )}
           >
-            <div className={classes.toolbarIcon}>
-              <IconButton onClick={() => setDrawerOpen(!drawerOpen)}>
-                <ChevronLeftIcon />
+            <Toolbar disableGutters={!drawerOpen} className={classes.toolbar}>
+              <IconButton
+                color="inherit"
+                onClick={() => setDrawerOpen(!drawerOpen)}
+                className={classNames(
+                  classes.menuButton,
+                  drawerOpen && classes.menuButtonHidden
+                )}
+              >
+                <MenuIcon />
               </IconButton>
-            </div>
-            <Divider />
-            <List>
-              <div>
-                <ListItem button component={Link} to="/admin/pizzas">
-                  <ListItemIcon>
-                    <LocalPizzaIcon />
-                  </ListItemIcon>
-                  <ListItemText primary={"Pizze"} />
-                </ListItem>
-                <ListItem button component={Link} to="/admin/ingredients">
-                  <ListItemIcon>
-                    <LocalFloristIcon />
-                  </ListItemIcon>
-                  <ListItemText primary={"Ingredienti"} />
-                </ListItem>
-                <ListItem button component={Link} to="/admin/orders">
-                  <ListItemIcon>
-                    <MoveToInboxIcon />
-                  </ListItemIcon>
-                  <ListItemText primary={"Ordini"} />
-                </ListItem>
-                <ListItem button component={Link} to="/admin/clients">
-                  <ListItemIcon>
-                    <PeopleIcon />
-                  </ListItemIcon>
-                  <ListItemText primary={"Clienti"} />
-                </ListItem>
+              <Typography
+                component="h1"
+                variant="h6"
+                color="inherit"
+                noWrap
+                className={classes.title}
+              >
+                {config.siteName}
+              </Typography>
+            </Toolbar>
+          </AppBar>
+          <Row grow>
+            <Drawer
+              variant="permanent"
+              classes={{
+                paper: classNames(
+                  classes.drawerPaper,
+                  !drawerOpen && classes.drawerPaperClose
+                )
+              }}
+              open={drawerOpen}
+            >
+              <div className={classes.toolbarIcon}>
+                <IconButton onClick={() => setDrawerOpen(!drawerOpen)}>
+                  <ChevronLeftIcon />
+                </IconButton>
               </div>
-            </List>
-          </Drawer>
-        </Row>
-      </Column>
-    </Row>
-  );
-});
+              <Divider />
+              <List>
+                <div>
+                  <ListItem button component={Link} to="/admin/pizzas">
+                    <ListItemIcon>
+                      <LocalPizzaIcon />
+                    </ListItemIcon>
+                    <ListItemText primary={"Pizze"} />
+                  </ListItem>
+                  <ListItem button component={Link} to="/admin/ingredients">
+                    <ListItemIcon>
+                      <LocalFloristIcon />
+                    </ListItemIcon>
+                    <ListItemText primary={"Ingredienti"} />
+                  </ListItem>
+                  <ListItem button component={Link} to="/admin/orders">
+                    <ListItemIcon>
+                      <MoveToInboxIcon />
+                    </ListItemIcon>
+                    <ListItemText primary={"Ordini"} />
+                  </ListItem>
+                  <ListItem button component={Link} to="/admin/clients">
+                    <ListItemIcon>
+                      <PeopleIcon />
+                    </ListItemIcon>
+                    <ListItemText primary={"Clienti"} />
+                  </ListItem>
+                </div>
+              </List>
+            </Drawer>
+            <main className={classes.content}>
+              <div className={classes.appBarSpacer} />
+              <Switch>
+                <Route
+                  to="/admin"
+                  render={() => <PizzasView pizzas={catalogItems} />}
+                />
+              </Switch>
+            </main>
+          </Row>
+        </Column>
+      </Row>
+    );
+  }
+);
