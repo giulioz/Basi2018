@@ -15,5 +15,13 @@ return [
             'path' => isset($_ENV['docker']) ? 'php://stdout' : __DIR__ . '/../logs/app.log',
             'level' => \Monolog\Logger::DEBUG,
         ],
+
+        // Database connection
+        "db" => [
+            "host" => "172.16.101.27",
+            "dbname" => "pizza",
+            "user" => "basi2018",
+            "pass" => "basi2018"
+        ],
     ],
 ];

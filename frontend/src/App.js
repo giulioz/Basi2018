@@ -16,6 +16,15 @@ export default withStyleConfig()(() => {
     JSON.parse(localStorage.getItem("orders")) || []
   );
 
+  const [ingredients, setIngredients] = useState(
+    JSON.parse(localStorage.getItem("ingredients")) || [
+      { name: "Pomodoro", amount: 1 },
+      { name: "Mozzarella", amount: 1 },
+      { name: "Carciofi", amount: 1 },
+      { name: "Balene", amount: 1 }
+    ]
+  );
+
   const [catalogItems, setCatalogItems] = useState(
     JSON.parse(localStorage.getItem("catalogItems")) || [
       {
@@ -47,8 +56,9 @@ export default withStyleConfig()(() => {
       localStorage.setItem("cart", JSON.stringify(cart));
       localStorage.setItem("orders", JSON.stringify(orders));
       localStorage.setItem("catalogItems", JSON.stringify(catalogItems));
+      localStorage.setItem("ingredients", JSON.stringify(ingredients));
     },
-    [cart, catalogItems, currentUser, orders]
+    [cart, catalogItems, currentUser, orders, ingredients]
   );
 
   return (
@@ -61,7 +71,9 @@ export default withStyleConfig()(() => {
         orders,
         setOrders,
         catalogItems,
-        setCatalogItems
+        setCatalogItems,
+        ingredients,
+        setIngredients
       }}
     />
   );

@@ -3,12 +3,35 @@
 use Slim\Http\Request;
 use Slim\Http\Response;
 
-// Routes
 
-$app->get('/[{name}]', function (Request $request, Response $response, array $args) {
-    // Sample log message
-    $this->logger->info("Slim-Skeleton '/' route");
+// get all users
+$app->get('/users', function ($request, $response, $args) {
+    $sth = $this->db->prepare("SELECT * FROM Utenti");
+    $sth->execute();
+    $users = $sth->fetchAll();
+    return $this->response->withJson($users);
+});
 
-    // Render index view
-    return $this->renderer->render($response, 'index.phtml', $args);
+// get all pizzas
+$app->get('/pizzas', function ($request, $response, $args) {
+    $sth = $this->db->prepare("SELECT * FROM Pizze");
+    $sth->execute();
+    $users = $sth->fetchAll();
+    return $this->response->withJson($users);
+});
+
+// get all orders
+$app->get('/orders', function ($request, $response, $args) {
+    $sth = $this->db->prepare("SELECT * FROM Ordini");
+    $sth->execute();
+    $users = $sth->fetchAll();
+    return $this->response->withJson($users);
+});
+
+// get all ingredients
+$app->get('/ingredients', function ($request, $response, $args) {
+    $sth = $this->db->prepare("SELECT * FROM Ingredienti");
+    $sth->execute();
+    $users = $sth->fetchAll();
+    return $this->response->withJson($users);
 });

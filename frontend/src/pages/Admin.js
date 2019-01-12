@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import classNames from "classnames";
 
-import { Link, Route, Switch } from "react-router-dom";
+import { Link, Route } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -19,7 +19,7 @@ import PeopleIcon from "@material-ui/icons/People";
 
 import Column from "../components/Column";
 import Row from "../components/Row";
-import PizzasView from "../components/PizzasView";
+import DataView from "../components/DataView";
 import config from "../config/config";
 
 const styles = theme => ({
@@ -101,6 +101,8 @@ export default withStyles(styles)(
     setCatalogItems,
     orders,
     setOrders,
+    ingredients,
+    setIngredients,
     classes
   }) => {
     const [drawerOpen, setDrawerOpen] = useState(true);
@@ -185,12 +187,57 @@ export default withStyles(styles)(
             </Drawer>
             <main className={classes.content}>
               <div className={classes.appBarSpacer} />
-              <Switch>
+              <>
                 <Route
-                  to="/admin"
-                  render={() => <PizzasView pizzas={catalogItems} />}
+                  exact
+                  path="/admin/pizzas"
+                  render={() => (
+                    <DataView
+                      data={catalogItems.map(p => [
+                        p.name,
+                        p.ingredients.join(", ")
+                      ])}
+                      columns={[{ name: "Nome" }, { name: "Ingredienti" }]}
+                    />
+                  )}
                 />
-              </Switch>
+                <Route
+                  exact
+                  path="/admin/ingredients"
+                  render={() => (
+                    <DataView
+                      data={ingredients.map(p => [p.name, p.amount])}
+                      columns={[{ name: "Nome" }, { name: "Quantità" }]}
+                    />
+                  )}
+                />
+                <Route
+                  exact
+                  path="/admin/orders"
+                  render={() => (
+                    <DataView
+                      data={catalogItems.map(p => [
+                        p.name,
+                        p.ingredients.join(", ")
+                      ])}
+                      columns={[{ name: "Nome" }, { name: "Ingredienti" }]}
+                    />
+                  )}
+                />
+                <Route
+                  exact
+                  path="/admin/clients"
+                  render={() => (
+                    <DataView
+                      data={catalogItems.map(p => [
+                        p.name,
+                        p.ingredients.join(", ")
+                      ])}
+                      columns={[{ name: "Nome" }, { name: "Ingredienti" }]}
+                    />
+                  )}
+                />
+              </>
             </main>
           </Row>
         </Column>

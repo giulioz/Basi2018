@@ -3,7 +3,7 @@ import MUIDataTable from "mui-datatables";
 import { Tooltip, IconButton } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 
-export default ({ pizzas }) => {
+export default ({ data, columns }) => {
   const AddButton = () => {
     return (
       <React.Fragment>
@@ -25,9 +25,6 @@ export default ({ pizzas }) => {
   return (
     <MUIDataTable
       options={{
-        filter: false,
-        print: false,
-        viewColumns: false,
         customToolbar: AddButton,
         textLabels: {
           body: {
@@ -63,8 +60,8 @@ export default ({ pizzas }) => {
           }
         }
       }}
-      data={pizzas.map(p => [p.name, p.ingredients.join(", ")])}
-      columns={[{ name: "Nome" }, { name: "Ingredienti" }]}
+      data={data}
+      columns={columns}
     />
   );
 };

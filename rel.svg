@@ -1,0 +1,151 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 733 432">
+  <defs>
+    <style>
+      .cls-1 {
+        clip-path: url(#clip-Artboard_2);
+      }
+
+      .cls-10, .cls-2 {
+        fill: #fff;
+      }
+
+      .cls-2, .cls-4 {
+        stroke: #707070;
+      }
+
+      .cls-3, .cls-5, .cls-7 {
+        fill: #707070;
+        font-family: HelveticaNeue, Helvetica Neue;
+      }
+
+      .cls-3 {
+        font-size: 20px;
+      }
+
+      .cls-4, .cls-9 {
+        fill: none;
+      }
+
+      .cls-5, .cls-7 {
+        font-size: 14px;
+      }
+
+      .cls-6, .cls-7 {
+        text-decoration: underline;
+      }
+
+      .cls-8 {
+        stroke: none;
+      }
+    </style>
+    <clipPath id="clip-Artboard_2">
+      <rect width="733" height="432"/>
+    </clipPath>
+  </defs>
+  <g id="Artboard_2" data-name="Artboard – 2" class="cls-1">
+    <rect class="cls-10" width="733" height="432"/>
+    <g id="Group_25" data-name="Group 25" transform="translate(12 14)">
+      <g id="Group_1" data-name="Group 1" transform="translate(71 6)">
+        <g id="Rectangle_1" data-name="Rectangle 1" class="cls-2" transform="translate(36 31)">
+          <rect class="cls-8" width="115" height="117"/>
+          <rect class="cls-9" x="0.5" y="0.5" width="114" height="116"/>
+        </g>
+        <text id="Pizze" class="cls-3" transform="translate(94 54)"><tspan x="-23.67" y="0">Pizze</tspan></text>
+        <line id="Line_1" data-name="Line 1" class="cls-4" x2="114" transform="translate(36.5 62.5)"/>
+        <text id="Nome_string_PK_Prezzo_float_" data-name="Nome (string) &lt;&lt;PK&gt;&gt;
+
+Prezzo (float)" class="cls-5" transform="translate(41 67)"><tspan class="cls-6"><tspan x="0" y="13">Nome (string) </tspan><tspan x="0" y="29">&lt;&lt;PK&gt;&gt;</tspan></tspan><tspan x="0" y="45"></tspan><tspan x="0" y="61">Prezzo (float)</tspan></text>
+      </g>
+      <g id="Group_2" data-name="Group 2" transform="translate(475 6)">
+        <g id="Rectangle_1-2" data-name="Rectangle 1" class="cls-2" transform="translate(36 31)">
+          <rect class="cls-8" width="115" height="117"/>
+          <rect class="cls-9" x="0.5" y="0.5" width="114" height="116"/>
+        </g>
+        <text id="Ingredienti" class="cls-3" transform="translate(93 54)"><tspan x="-46.86" y="0">Ingredienti</tspan></text>
+        <line id="Line_1-2" data-name="Line 1" class="cls-4" x2="114" transform="translate(36.5 62.5)"/>
+        <text id="Nome_string_PK_Quantità_int_" data-name="Nome (string) &lt;&lt;PK&gt;&gt;
+
+Quantità (int)" class="cls-5" transform="translate(41 67)"><tspan class="cls-6"><tspan x="0" y="13">Nome (string) </tspan><tspan x="0" y="29">&lt;&lt;PK&gt;&gt;</tspan></tspan><tspan x="0" y="45"></tspan><tspan x="0" y="61">Quantità (int)</tspan></text>
+      </g>
+      <g id="Group_3" data-name="Group 3" transform="translate(27 193)">
+        <g id="Rectangle_1-3" data-name="Rectangle 1" class="cls-2" transform="translate(36 31)">
+          <rect class="cls-8" width="160.173" height="147"/>
+          <rect class="cls-9" x="0.5" y="0.5" width="159.173" height="146"/>
+        </g>
+        <text id="Utenti" class="cls-3" transform="translate(116 54)"><tspan x="-26.67" y="0">Utenti</tspan></text>
+        <line id="Line_1-3" data-name="Line 1" class="cls-4" x2="159.173" transform="translate(36.5 62.5)"/>
+        <text id="Nome_string_Cognome_string_Indirizzo_string_Telefono_string_Login_string_PK_Password_string_" data-name="Nome (string)
+Cognome (string)
+Indirizzo (string)
+Telefono (string)
+Login (string) &lt;&lt;PK&gt;&gt;
+Password (string)" class="cls-5" transform="translate(41 67)"><tspan x="0" y="13">Nome (string)</tspan><tspan x="0" y="29">Cognome (string)</tspan><tspan x="0" y="45">Indirizzo (string)</tspan><tspan x="0" y="61">Telefono (string)</tspan><tspan class="cls-6"><tspan x="0" y="77">Login (string) &lt;&lt;PK&gt;&gt;</tspan></tspan><tspan x="0" y="93">Password (string)</tspan></text>
+      </g>
+      <g id="Group_4" data-name="Group 4" transform="translate(238 202)">
+        <g id="Rectangle_1-4" data-name="Rectangle 1" class="cls-2" transform="translate(36 31)">
+          <rect class="cls-8" width="151.841" height="127"/>
+          <rect class="cls-9" x="0.5" y="0.5" width="150.841" height="126"/>
+        </g>
+        <text id="Ordini" class="cls-3" transform="translate(112 54)"><tspan x="-26.68" y="0">Ordini</tspan></text>
+        <line id="Line_1-4" data-name="Line 1" class="cls-4" x2="150.841" transform="translate(36.5 62.5)"/>
+        <text id="ID_Ordine_int_PK_Data_datetime_Indirizzo_string_ID_Utente_FK_Utenti_" data-name="ID_Ordine (int) &lt;&lt;PK&gt;&gt;
+Data (datetime)
+Indirizzo (string)
+ID_Utente &lt;&lt;FK(Utenti)&gt;&gt;" class="cls-5" transform="translate(41 67)"><tspan class="cls-6"><tspan x="0" y="13">ID_Ordine (int) &lt;&lt;PK&gt;&gt;</tspan></tspan><tspan x="0" y="29">Data (datetime)</tspan><tspan x="0" y="45">Indirizzo (string)</tspan><tspan x="0" y="61">ID_Utente </tspan><tspan x="0" y="77">&lt;&lt;FK(Utenti)&gt;&gt;</tspan></text>
+      </g>
+      <line id="Line_4" data-name="Line 4" class="cls-4" x2="51" transform="translate(223.5 301.5)"/>
+      <g id="Group_5" data-name="Group 5" transform="translate(58 18)">
+        <line id="Line_5" data-name="Line 5" class="cls-4" y1="5" x2="7" transform="translate(165.5 278.5)"/>
+        <line id="Line_6" data-name="Line 6" class="cls-4" x1="7" y1="5" transform="translate(165.5 283.5)"/>
+      </g>
+      <g id="Group_17" data-name="Group 17" transform="translate(246 -5)">
+        <g id="Rectangle_1-5" data-name="Rectangle 1" class="cls-2" transform="translate(36 31)">
+          <rect class="cls-8" width="169.334" height="146"/>
+          <rect class="cls-9" x="0.5" y="0.5" width="168.334" height="145"/>
+        </g>
+        <text id="Ing_Pizze" class="cls-3" transform="translate(120 54)"><tspan x="-42.56" y="0">Ing_Pizze</tspan></text>
+        <line id="Line_1-5" data-name="Line 1" class="cls-4" x2="168.334" transform="translate(36.5 62.5)"/>
+        <text id="NomePizza_string_FK_Pizze_PK_NomeIngrediente_string_FK_Ingredienti_PK_" data-name="NomePizza (string) &lt;&lt;FK(Pizze)&gt;&gt; &lt;&lt;PK&gt;&gt;
+
+NomeIngrediente (string) &lt;&lt;FK(Ingredienti)&gt;&gt; &lt;&lt;PK&gt;&gt;" class="cls-7" transform="translate(41 67)"><tspan x="0" y="13">NomePizza (string) </tspan><tspan x="0" y="29">&lt;&lt;FK(Pizze)&gt;&gt; &lt;&lt;PK&gt;&gt;</tspan><tspan x="0" y="45"></tspan><tspan x="0" y="61">NomeIngrediente (string) </tspan><tspan x="0" y="77">&lt;&lt;FK(Ingredienti)&gt;&gt; </tspan><tspan x="0" y="93">&lt;&lt;PK&gt;&gt;</tspan></text>
+      </g>
+      <g id="Group_21" data-name="Group 21" transform="translate(-147)">
+        <line id="Line_10" data-name="Line 10" class="cls-4" x2="61" transform="translate(368.5 117.5)"/>
+        <g id="Group_18" data-name="Group 18" transform="translate(203 -166)">
+          <line id="Line_5-2" data-name="Line 5" class="cls-4" y1="5" x2="7" transform="translate(165.5 278.5)"/>
+          <line id="Line_6-2" data-name="Line 6" class="cls-4" x1="7" y1="5" transform="translate(165.5 283.5)"/>
+        </g>
+      </g>
+      <g id="Group_20" data-name="Group 20" transform="translate(940 235) rotate(180)">
+        <line id="Line_11" data-name="Line 11" class="cls-4" x2="61" transform="translate(428.5 117.5)"/>
+        <g id="Group_19" data-name="Group 19" transform="translate(263 -166)">
+          <line id="Line_5-3" data-name="Line 5" class="cls-4" y1="5" x2="7" transform="translate(165.5 278.5)"/>
+          <line id="Line_6-3" data-name="Line 6" class="cls-4" x1="7" y1="5" transform="translate(165.5 283.5)"/>
+        </g>
+      </g>
+      <g id="Group_22" data-name="Group 22" transform="translate(441 193)">
+        <g id="Rectangle_1-6" data-name="Rectangle 1" class="cls-2" transform="translate(36 31)">
+          <rect class="cls-8" width="169.334" height="155"/>
+          <rect class="cls-9" x="0.5" y="0.5" width="168.334" height="154"/>
+        </g>
+        <text id="Ordini_Pizze" class="cls-3" transform="translate(120 54)"><tspan x="-55.35" y="0">Ordini_Pizze</tspan></text>
+        <line id="Line_1-6" data-name="Line 1" class="cls-4" x2="168.334" transform="translate(36.5 62.5)"/>
+        <text id="NomePizza_string_FK_Pizze_PK_ID_Ordine_int_FK_Ordini_PK_Quantità_int_" data-name="NomePizza (string) &lt;&lt;FK(Pizze)&gt;&gt; &lt;&lt;PK&gt;&gt;
+
+ID_Ordine (int) &lt;&lt;FK(Ordini)&gt;&gt; &lt;&lt;PK&gt;&gt;
+
+Quantità (int)" class="cls-5" transform="translate(41 67)"><tspan class="cls-6"><tspan x="0" y="13">NomePizza (string) </tspan><tspan x="0" y="29">&lt;&lt;FK(Pizze)&gt;&gt; &lt;&lt;PK&gt;&gt;</tspan></tspan><tspan x="0" y="45"></tspan><tspan class="cls-6"><tspan x="0" y="61">ID_Ordine (int) </tspan><tspan x="0" y="77">&lt;&lt;FK(Ordini)&gt;&gt; &lt;&lt;PK&gt;&gt;</tspan></tspan><tspan x="0" y="93"></tspan><tspan x="0" y="109">Quantità (int)</tspan></text>
+      </g>
+      <line id="Line_12" data-name="Line 12" class="cls-4" x2="51" transform="translate(425.5 301.5)"/>
+      <g id="Group_23" data-name="Group 23" transform="translate(260 18)">
+        <line id="Line_5-4" data-name="Line 5" class="cls-4" y1="5" x2="7" transform="translate(165.5 278.5)"/>
+        <line id="Line_6-4" data-name="Line 6" class="cls-4" x1="7" y1="5" transform="translate(165.5 283.5)"/>
+      </g>
+      <path id="Path_2" data-name="Path 2" class="cls-4" d="M356.677,633V592.963H61.918V562.926" transform="translate(130 -409)"/>
+      <g id="Group_24" data-name="Group 24" transform="translate(475.5 -11.5) rotate(90)">
+        <line id="Line_5-5" data-name="Line 5" class="cls-4" y1="5" x2="7" transform="translate(165.5 278.5)"/>
+        <line id="Line_6-5" data-name="Line 6" class="cls-4" x1="7" y1="5" transform="translate(165.5 283.5)"/>
+      </g>
+    </g>
+  </g>
+</svg>
