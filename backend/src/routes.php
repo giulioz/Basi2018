@@ -2,10 +2,44 @@
 
 use Slim\Http\Request;
 use Slim\Http\Response;
+use ReallySimpleJWT\Token;
+
+function validate($request) {
+    $headers = $request->getHeaders();
+    $token = explode(" ", $headers["HTTP_AUTHORIZATION"][0])[1];
+    if ($token == null) {
+        return false;
+    }
+    $result = Token::validate($token, 'secret');
+}
+
+// add new user
+$app->post('/users', function ($request, $response, $args) {
+    $sth = $this->db->prepare("SELECT * FROM Utenti");
+    $sth->execute();
+    $users = $sth->fetchAll();
+    return $this->response->withJson($users);
+});
+
+// check user and returns token
+$app->get('/login', function ($request, $response, $args) {
+    $sth = $this->db->prepare("SELECT * FROM Utenti");
+    $sth->execute();
+    $users = $sth->fetchAll();
+    return $this->response->withJson($users);
+});
+
+
+
+
 
 
 // get all users
 $app->get('/users', function ($request, $response, $args) {
+    if (!validate($request)) {
+        return $response->withStatus(401);
+    }
+
     $sth = $this->db->prepare("SELECT * FROM Utenti");
     $sth->execute();
     $users = $sth->fetchAll();
