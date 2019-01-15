@@ -28,11 +28,12 @@ export default withStyles(styles)(({ open, onLogin, onClose, classes }) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e && e.preventDefault();
 
-    if (loginUser(username, password)) {
-      onLogin(username);
+    const token = await loginUser(username, password);
+    if (token) {
+      onLogin(token);
     } else {
       setError(true);
     }

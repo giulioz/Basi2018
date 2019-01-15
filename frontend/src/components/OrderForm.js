@@ -26,6 +26,10 @@ const styles = theme => ({
 
 export default withStyles(styles)(
   ({ open, user, onClose, onOrder, cart, classes }) => {
+    if (!user) {
+      return null;
+    }
+
     const [date, setDate] = useState(new Date());
     const [address, setAddress] = useState(user.address);
 

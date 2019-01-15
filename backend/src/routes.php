@@ -11,7 +11,7 @@ function getUser($request) {
         $headers = $request->getHeaders();
         $token = explode(" ", $headers["HTTP_AUTHORIZATION"][0])[1];
         $decoded = JWT::decode($token, secret, array('HS256'));
-        return decoded;
+        return $decoded;
     } catch (Exception $e) {
         return false;
     }
@@ -57,6 +57,20 @@ $app->post('/users', function ($request, $response, $args) {
     $sth->bindParam("Password", $input["Password"]);
     $sth->execute();
     return 200;
+});
+
+// get current user
+$app->get('/user', function ($request, $response, $args) {
+    $user = getUser($request);
+    if (!$user) {
+        return $response->withStatus(401);
+    }
+
+    $sth = $this->db->prepare("SELECT * FROM Utenti u WHERE u.Login = :user");
+    $sth->bindParam("user", $user->Login);
+    $sth->execute();
+    $users = $sth->fetchAll();
+    return $this->response->withJson($users[0]);
 });
 
 // get all users

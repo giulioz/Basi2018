@@ -5,7 +5,7 @@ import Header from "../components/Header";
 import Catalog from "../components/Catalog";
 import LoginForm from "../components/LoginForm";
 import RegisterForm from "../components/RegisterForm";
-import { getUser } from "../api/user";
+import { getUser, loginUser } from "../api/user";
 import OrderForm from "../components/OrderForm";
 import Column from "../components/Column";
 import Row from "../components/Row";
@@ -28,6 +28,8 @@ const styles = theme => ({
 
 export default withStyles(styles)(
   ({
+    token,
+    setToken,
     currentUser,
     setCurrentUser,
     cart,
@@ -58,8 +60,10 @@ export default withStyles(styles)(
       }
     };
 
-    const handleLogin = username => {
-      setCurrentUser(getUser(username));
+    const handleLogin = async token => {
+      setToken(token);
+      setCurrentUser(await getUser(token));
+      setLoginOpen(false);
     };
 
     const handleOrder = order => {

@@ -4,6 +4,10 @@ import Routing from "./Routing";
 import withStyleConfig from "./components/withStyleConfig";
 
 export default withStyleConfig()(() => {
+  const [token, setToken] = useState(
+    JSON.parse(localStorage.getItem("token")) || null
+  );
+
   const [currentUser, setCurrentUser] = useState(
     JSON.parse(localStorage.getItem("currentUser")) || null
   );
@@ -52,18 +56,21 @@ export default withStyleConfig()(() => {
 
   useEffect(
     () => {
+      localStorage.setItem("token", JSON.stringify(token));
       localStorage.setItem("currentUser", JSON.stringify(currentUser));
       localStorage.setItem("cart", JSON.stringify(cart));
       localStorage.setItem("orders", JSON.stringify(orders));
       localStorage.setItem("catalogItems", JSON.stringify(catalogItems));
       localStorage.setItem("ingredients", JSON.stringify(ingredients));
     },
-    [cart, catalogItems, currentUser, orders, ingredients]
+    [cart, catalogItems, currentUser, orders, ingredients, token]
   );
 
   return (
     <Routing
       {...{
+        token,
+        setToken,
         currentUser,
         setCurrentUser,
         cart,
