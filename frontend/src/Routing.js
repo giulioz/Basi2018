@@ -9,9 +9,19 @@ export default ({ ...appState }) => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/" exact render={() => <Index {...appState} />} />
-        <Route path="/orders" exact render={() => <Orders {...appState} />} />
-        <Route path="/admin" render={() => <Admin {...appState} />} />
+        {appState.currentUser && [
+          <Route
+            path="/orders"
+            render={() => <Orders {...appState} />}
+            key={"orders"}
+          />,
+          <Route
+            path="/admin"
+            render={() => <Admin {...appState} />}
+            key={"admin"}
+          />
+        ]}
+        <Route render={() => <Index {...appState} />} />
       </Switch>
     </BrowserRouter>
   );

@@ -85,6 +85,7 @@ export default withStyles(styles)(
           <OrderForm
             user={currentUser}
             open={orderOpen}
+            cart={cart}
             onClose={() => setOrderOpen(false)}
             onOrder={handleOrder}
           />
@@ -110,7 +111,7 @@ export default withStyles(styles)(
         <Row className={classes.end}>
           <Column>
             <Typography variant="h6">
-              <strong>Totale:</strong> € {total}
+              <strong>Totale:</strong> € {total.toFixed(2)}
             </Typography>
           </Column>
           <Button

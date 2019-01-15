@@ -82,11 +82,10 @@ $app->get('/pizzas', function ($request, $response, $args) {
         $sth1->bindParam("name", $pizzas[$i]["Nome"]);
         $sth1->execute();
         $ingredients = $sth1->fetchAll();
-
-        function ext($n) {
+        
+        $tmp = array_map(function ($n) {
             return($n["NomeIngrediente"]);
-        }
-        $tmp = array_map("ext", $ingredients);
+        }, $ingredients);
         $pizzas[$i]["Ingredienti"] = $tmp;
     }
     
