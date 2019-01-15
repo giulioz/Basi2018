@@ -16,6 +16,7 @@ import LocalPizzaIcon from "@material-ui/icons/LocalPizza";
 import LocalFloristIcon from "@material-ui/icons/LocalFlorist";
 import MoveToInboxIcon from "@material-ui/icons/MoveToInbox";
 import PeopleIcon from "@material-ui/icons/People";
+import HomeIcon from "@material-ui/icons/Home";
 import { format } from "date-fns";
 import itLocale from "date-fns/locale/it";
 
@@ -25,19 +26,6 @@ import DataView from "../components/DataView";
 import config from "../config/config";
 import { getPizzas, getIngredients, getOrders } from "../api/data";
 import { getUsers } from "../api/user";
-
-const aggregate = strings => {
-  const arr = [];
-  strings.forEach(s => {
-    const found = arr.find(f => f.name === s);
-    if (found) {
-      found.count++;
-    } else {
-      arr.push({ name: s, count: 1 });
-    }
-  });
-  return arr;
-};
 
 const styles = theme => ({
   toolbarIcon: {
@@ -236,6 +224,13 @@ export default withStyles(styles)(
                       <PeopleIcon />
                     </ListItemIcon>
                     <ListItemText primary={"Clienti"} />
+                  </ListItem>
+                  <Divider />
+                  <ListItem button component={Link} to="/">
+                    <ListItemIcon>
+                      <HomeIcon />
+                    </ListItemIcon>
+                    <ListItemText primary={"Home"} />
                   </ListItem>
                 </div>
               </List>

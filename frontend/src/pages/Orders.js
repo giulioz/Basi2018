@@ -22,7 +22,7 @@ import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import Column from "../components/Column";
 import Row from "../components/Row";
-import { getOrders } from "../api/data";
+import { getOrders, deleteOrder } from "../api/data";
 
 const styles = theme => ({
   container: {
@@ -63,7 +63,7 @@ export default withStyles(styles)(
       () => {
         fetchOrders();
       },
-      [token]
+      [token, toDelete]
     );
 
     const aggregated = [...new Set(orders.map(p => p.ID_Ordine))].map(o => ({
@@ -71,7 +71,10 @@ export default withStyles(styles)(
       Pizze: orders.filter(p => p.ID_Ordine === o)
     }));
 
-    const handleDelete = () => {};
+    const handleDelete = () => {
+      deleteOrder(toDelete, token);
+      setToDelete(null);
+    };
 
     return (
       <>
@@ -122,7 +125,7 @@ export default withStyles(styles)(
                     <IconButton
                       color="inherit"
                       onClick={() => {
-                        setToDelete(i);
+                        setToDelete(order.ID_Ordine);
                         setDeleteConfirmOpen(true);
                       }}
                     >

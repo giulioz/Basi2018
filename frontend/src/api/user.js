@@ -39,7 +39,7 @@ export const getUser = async token => {
     phone: user.Telefono,
     login: user.Login,
     password: user.Password,
-    admin: user.Amministratore
+    admin: user.Amministratore > 0
   };
 };
 
@@ -58,7 +58,7 @@ export const getUsers = async token => {
     phone: user.Telefono,
     login: user.Login,
     password: user.Password,
-    admin: user.Amministratore
+    admin: user.Amministratore > 0
   }));
 };
 

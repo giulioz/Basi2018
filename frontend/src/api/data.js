@@ -43,3 +43,11 @@ export const order = async ({ Data, Indirizzo, Pizze }, token) =>
       Authorization: "Bearer " + token
     }
   });
+
+export const deleteOrder = async (id, token) =>
+  fetch(config.apiUrl + "orders/" + id, {
+    method: "DELETE",
+    headers: {
+      Authorization: "Bearer " + token
+    }
+  });

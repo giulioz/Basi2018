@@ -9,7 +9,7 @@ import { getUser } from "../api/user";
 import OrderForm from "../components/OrderForm";
 import Column from "../components/Column";
 import Row from "../components/Row";
-import { getPizzas, order } from "../api/data";
+import { getPizzas } from "../api/data";
 
 const styles = theme => ({
   divider: {

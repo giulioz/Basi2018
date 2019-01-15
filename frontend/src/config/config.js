@@ -1,4 +1,4 @@
 export default {
-  siteName: "Pizzoria",
+  siteName: "PHPizza",
   apiUrl: "http://localhost:8080/"
 };
