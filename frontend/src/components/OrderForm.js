@@ -13,6 +13,7 @@ import { DatePicker, TimePicker } from "material-ui-pickers";
 
 import Column from "./Column";
 import Row from "./Row";
+import { order } from "../api/data";
 
 const styles = theme => ({
   title: {
@@ -25,7 +26,17 @@ const styles = theme => ({
 });
 
 export default withStyles(styles)(
-  ({ open, user, onClose, onOrder, cart, classes }) => {
+  ({
+    setCart,
+    catalogItems,
+    token,
+    open,
+    user,
+    onClose,
+    onOrder,
+    cart,
+    classes
+  }) => {
     if (!user) {
       return null;
     }
@@ -33,14 +44,26 @@ export default withStyles(styles)(
     const [date, setDate] = useState(new Date());
     const [address, setAddress] = useState(user.address);
 
-    const handleSubmit = e => {
+    const aggregatedCart = catalogItems.map(item => ({
+      ...item,
+      count: (cart && cart.filter(ci => ci.name === item.name).length) || 0
+    }));
+
+    const handleSubmit = async e => {
       e && e.preventDefault();
 
-      onOrder({
-        date: date.toISOString(),
-        address: address || user.address,
-        cart
-      });
+      await order(
+        {
+          Data: date.toISOString(),
+          Indirizzo: address || user.address,
+          Pizze: aggregatedCart.map(pizza => ({
+            NomePizza: pizza.name,
+            Quantita: pizza.count
+          }))
+        },
+        token
+      );
+      setCart([]);
       onClose();
     };
 

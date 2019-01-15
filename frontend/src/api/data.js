@@ -18,3 +18,18 @@ export const getIngredients = async () => {
     quantity: parseFloat(ingredient.Quantita)
   }));
 };
+
+export const order = async ({ Data, Indirizzo, Pizze }, token) =>
+  fetch(config.apiUrl + "orders", {
+    method: "POST",
+    body: JSON.stringify({
+      Data,
+      Indirizzo,
+      Pizze
+    }),
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token
+    }
+  });

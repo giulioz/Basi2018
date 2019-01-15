@@ -9,7 +9,7 @@ import { getUser } from "../api/user";
 import OrderForm from "../components/OrderForm";
 import Column from "../components/Column";
 import Row from "../components/Row";
-import { getPizzas } from "../api/data";
+import { getPizzas, order } from "../api/data";
 
 const styles = theme => ({
   divider: {
@@ -100,8 +100,11 @@ export default withStyles(styles)(
             onLogin={handleLogin}
           />
           <OrderForm
+            token={token}
+            catalogItems={catalogItems}
             user={currentUser}
             open={orderOpen}
+            setCart={setCart}
             cart={cart}
             onClose={() => setOrderOpen(false)}
             onOrder={handleOrder}

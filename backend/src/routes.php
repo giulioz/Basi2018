@@ -129,13 +129,23 @@ $app->get('/orders', function ($request, $response, $args) {
 // add a new order
 $app->post('/orders', function ($request, $response, $args) {
     $user = getUser($request);
+    $input = $request->getParsedBody();
     
     if ($user) {
-        $sth = $this->db->prepare("INSERT INTO Ordini()");
-        $sth->bindParam("user", $user->Login);
+        $sth = $this->db->prepare("INSERT INTO Ordini(Data, Indirizzo, Utente) VALUES (:Data, :Indirizzo, :Utente)");
+        $sth->bindParam("Utente", $user->Login);
+        $sth->bindParam("Data", $input["Data"]);
+        $sth->bindParam("Indirizzo", $input["Indirizzo"]);
         $sth->execute();
-        $orders = $sth->fetchAll();
-        return $this->response->withJson($orders);
+
+        foreach ($input["Pizze"] as $pizza) {
+            $sth1 = $this->db->prepare("INSERT INTO Ordini_Pizze VALUES (:NomePizza, LAST_INSERT_ID(), :Quantita)");
+            $sth1->bindParam("NomePizza", $pizza["NomePizza"]);
+            $sth1->bindParam("Quantita", $pizza["Quantita"]);
+            $sth1->execute();
+        }
+
+        return 200;
     } else {
         return $response->withStatus(401);
     }
