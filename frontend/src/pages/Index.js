@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, Divider, withStyles, Typography } from "@material-ui/core";
 
 import Header from "../components/Header";
 import Catalog from "../components/Catalog";
 import LoginForm from "../components/LoginForm";
 import RegisterForm from "../components/RegisterForm";
-import { getUser, loginUser } from "../api/user";
+import { getUser } from "../api/user";
 import OrderForm from "../components/OrderForm";
 import Column from "../components/Column";
 import Row from "../components/Row";
+import { getPizzas } from "../api/data";
 
 const styles = theme => ({
   divider: {
@@ -34,8 +35,6 @@ export default withStyles(styles)(
     setCurrentUser,
     cart,
     setCart,
-    catalogItems,
-    setCatalogItems,
     orders,
     setOrders,
     classes
@@ -43,6 +42,17 @@ export default withStyles(styles)(
     const [loginOpen, setLoginOpen] = React.useState(false);
     const [registerOpen, setRegisterOpen] = React.useState(false);
     const [orderOpen, setOrderOpen] = React.useState(false);
+
+    const [catalogItems, setCatalogItems] = React.useState([]);
+    async function fetchItems() {
+      setCatalogItems(await getPizzas());
+    }
+    useEffect(
+      () => {
+        fetchItems();
+      },
+      [token]
+    );
 
     const handleAddToCart = name => {
       if (currentUser) {
@@ -71,7 +81,10 @@ export default withStyles(styles)(
       setCart([]);
     };
 
-    const total = cart.reduce((sf, item) => item.price + sf, 0);
+    const total =
+      cart && cart.length > 0
+        ? cart.reduce((sf, item) => item.price + sf, 0)
+        : 0;
 
     return (
       <>

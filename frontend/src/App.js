@@ -29,41 +29,15 @@ export default withStyleConfig()(() => {
     ]
   );
 
-  const [catalogItems, setCatalogItems] = useState(
-    JSON.parse(localStorage.getItem("catalogItems")) || [
-      {
-        name: "Margherita",
-        price: 5.5,
-        ingredients: ["Pomodoro", "Mozzarella"]
-      },
-      {
-        name: "Capricciosa",
-        price: 6.8,
-        ingredients: ["Pomodoro", "Mozzarella", "Carciofi", "Balene"]
-      },
-      {
-        name: "Prosciutto e funghi",
-        price: 6,
-        ingredients: ["Pomodoro", "Mozzarella", "Funghi", "Prosciutto"]
-      },
-      {
-        name: "Diavola",
-        price: 6.6,
-        ingredients: ["Pomodoro", "Mozzarella", "Satana"]
-      }
-    ]
-  );
-
   useEffect(
     () => {
       localStorage.setItem("token", JSON.stringify(token));
       localStorage.setItem("currentUser", JSON.stringify(currentUser));
       localStorage.setItem("cart", JSON.stringify(cart));
       localStorage.setItem("orders", JSON.stringify(orders));
-      localStorage.setItem("catalogItems", JSON.stringify(catalogItems));
       localStorage.setItem("ingredients", JSON.stringify(ingredients));
     },
-    [cart, catalogItems, currentUser, orders, ingredients, token]
+    [cart, currentUser, orders, ingredients, token]
   );
 
   return (
@@ -77,8 +51,6 @@ export default withStyleConfig()(() => {
         setCart,
         orders,
         setOrders,
-        catalogItems,
-        setCatalogItems,
         ingredients,
         setIngredients
       }}

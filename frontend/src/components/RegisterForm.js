@@ -10,7 +10,7 @@ import {
   withStyles
 } from "@material-ui/core";
 
-import { registerUser } from "../api/user";
+import { registerUser, loginUser } from "../api/user";
 import config from "../config/config";
 import Column from "./Column";
 import Row from "./Row";
@@ -33,10 +33,10 @@ export default withStyles(styles)(({ open, onClose, onLogin, classes }) => {
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e && e.preventDefault();
 
-    registerUser({
+    await registerUser({
       username,
       password,
       name,
@@ -44,7 +44,8 @@ export default withStyles(styles)(({ open, onClose, onLogin, classes }) => {
       address,
       phone
     });
-    onLogin(username);
+    const token = await loginUser(username, password);
+    onLogin(token);
     onClose();
   };
 

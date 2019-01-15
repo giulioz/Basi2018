@@ -106,7 +106,11 @@ export default withStyles(styles)(
           {aggregatedCart.map(item => (
             <ListItem key={item.name}>
               <ListItemText
-                primary={item.name}
+                primary={
+                  <>
+                    <strong>{item.name}</strong> - €{item.price}
+                  </>
+                }
                 secondary={item.ingredients.join(", ")}
               />
               <ListItemSecondaryAction>

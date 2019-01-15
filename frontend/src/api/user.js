@@ -8,7 +8,7 @@ export const registerUser = async ({
   address,
   phone
 }) =>
-  fetch(config.apiUrl + "register", {
+  fetch(config.apiUrl + "users", {
     method: "POST",
     body: JSON.stringify({
       Nome: username,
@@ -17,7 +17,11 @@ export const registerUser = async ({
       Telefono: surname,
       Login: address,
       Password: phone
-    })
+    }),
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    }
   });
 
 export const getUser = async token => {
