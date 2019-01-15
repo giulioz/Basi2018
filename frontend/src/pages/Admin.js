@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import classNames from "classnames";
 
 import { Link, Route } from "react-router-dom";
@@ -23,6 +23,8 @@ import Column from "../components/Column";
 import Row from "../components/Row";
 import DataView from "../components/DataView";
 import config from "../config/config";
+import { getPizzas, getIngredients, getOrders } from "../api/data";
+import { getUsers } from "../api/user";
 
 const aggregate = strings => {
   const arr = [];
@@ -107,21 +109,58 @@ const styles = theme => ({
 });
 
 export default withStyles(styles)(
-  ({
-    currentUser,
-    setCurrentUser,
-    cart,
-    setCart,
-    catalogItems,
-    setCatalogItems,
-    orders,
-    setOrders,
-    ingredients,
-    setIngredients,
-    classes
-  }) => {
+  ({ token, currentUser, setCurrentUser, cart, setCart, classes }) => {
+    const [catalogItems, setCatalogItems] = React.useState([]);
+    async function fetchItems() {
+      setCatalogItems(await getPizzas());
+    }
+    useEffect(
+      () => {
+        fetchItems();
+      },
+      [token]
+    );
+
+    const [ingredients, setIngredients] = React.useState([]);
+    async function fetchIngredients() {
+      setIngredients(await getIngredients());
+    }
+    useEffect(
+      () => {
+        fetchIngredients();
+      },
+      [token]
+    );
+
+    const [orders, setOrders] = useState([]);
+    async function fetchOrders() {
+      setOrders(await getOrders(token));
+    }
+    useEffect(
+      () => {
+        fetchOrders();
+      },
+      [token]
+    );
+    const aggregatedOrders = [...new Set(orders.map(p => p.ID_Ordine))].map(
+      o => ({
+        ...orders.filter(p => p.ID_Ordine === o)[0],
+        Pizze: orders.filter(p => p.ID_Ordine === o)
+      })
+    );
+
+    const [users, setUsers] = useState([]);
+    async function fetchUsers() {
+      setUsers(await getUsers(token));
+    }
+    useEffect(
+      () => {
+        fetchUsers();
+      },
+      [token]
+    );
+
     const [drawerOpen, setDrawerOpen] = useState(true);
-    const users = [];
 
     return (
       <Row style={{ height: "100%" }}>
@@ -222,7 +261,7 @@ export default withStyles(styles)(
                   path="/admin/ingredients"
                   render={() => (
                     <DataView
-                      data={ingredients.map(p => [p.name, p.amount])}
+                      data={ingredients.map(p => [p.name, p.quantity])}
                       columns={[{ name: "Nome" }, { name: "Quantità" }]}
                     />
                   )}
@@ -232,14 +271,14 @@ export default withStyles(styles)(
                   path="/admin/orders"
                   render={() => (
                     <DataView
-                      data={orders.map(p => [
-                        p.id | "",
-                        format(p.date, "d MMMM yyyy hh:mm", {
+                      data={aggregatedOrders.map(p => [
+                        p.ID_Ordine,
+                        format(p.Data, "d MMMM yyyy hh:mm", {
                           locale: itLocale
                         }),
-                        p.address | "",
-                        aggregate(p.cart.map(p => p.name))
-                          .map(pizza => `${pizza.count}x ${pizza.name}`)
+                        p.Indirizzo,
+                        p.Pizze.filter(p => p.Quantita > 0)
+                          .map(pizza => `${pizza.Quantita}x ${pizza.NomePizza}`)
                           .join(", ")
                       ])}
                       columns={[
@@ -257,11 +296,11 @@ export default withStyles(styles)(
                   render={() => (
                     <DataView
                       data={users.map(p => [
-                        p.Nome,
-                        p.Cognome,
-                        p.Indirizzo,
-                        p.Telefono,
-                        p.Login
+                        p.name,
+                        p.surname,
+                        p.address,
+                        p.phone,
+                        p.login
                       ])}
                       columns={[
                         { name: "Nome" },

@@ -38,8 +38,28 @@ export const getUser = async token => {
     address: user.Indirizzo,
     phone: user.Telefono,
     login: user.Login,
-    password: user.Password
+    password: user.Password,
+    admin: user.Amministratore
   };
+};
+
+export const getUsers = async token => {
+  const users = await (await fetch(config.apiUrl + "users", {
+    method: "GET",
+    headers: {
+      Authorization: "Bearer " + token
+    }
+  })).json();
+
+  return users.map(user => ({
+    name: user.Nome,
+    surname: user.Cognome,
+    address: user.Indirizzo,
+    phone: user.Telefono,
+    login: user.Login,
+    password: user.Password,
+    admin: user.Amministratore
+  }));
 };
 
 export const loginUser = async (username, password) => {

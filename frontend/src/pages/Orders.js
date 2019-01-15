@@ -66,8 +66,7 @@ export default withStyles(styles)(
       [token]
     );
 
-    const ids = [...new Set(orders.map(p => p.ID_Ordine))];
-    const aggregated = ids.map(o => ({
+    const aggregated = [...new Set(orders.map(p => p.ID_Ordine))].map(o => ({
       ...orders.filter(p => p.ID_Ordine === o)[0],
       Pizze: orders.filter(p => p.ID_Ordine === o)
     }));
