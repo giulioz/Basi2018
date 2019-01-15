@@ -27,7 +27,7 @@ const styles = theme => ({
 export default withStyles(styles)(
   ({ open, user, onClose, onOrder, cart, classes }) => {
     const [date, setDate] = useState(new Date());
-    const [address, setAddress] = useState("");
+    const [address, setAddress] = useState(user.address);
 
     const handleSubmit = e => {
       e && e.preventDefault();

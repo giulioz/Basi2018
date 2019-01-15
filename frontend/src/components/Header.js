@@ -100,7 +100,7 @@ export default withStyles(styles)(
           {username ? (
             <>
               <Typography variant="h6">{username}</Typography>
-              <IconButton color="inherit">
+              <IconButton color="inherit" component={Link} to="/">
                 <Badge badgeContent={cartQuantity} color="primary">
                   <ShoppingCartIcon />
                 </Badge>

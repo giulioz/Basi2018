@@ -16,11 +16,26 @@ import LocalPizzaIcon from "@material-ui/icons/LocalPizza";
 import LocalFloristIcon from "@material-ui/icons/LocalFlorist";
 import MoveToInboxIcon from "@material-ui/icons/MoveToInbox";
 import PeopleIcon from "@material-ui/icons/People";
+import { format } from "date-fns";
+import itLocale from "date-fns/locale/it";
 
 import Column from "../components/Column";
 import Row from "../components/Row";
 import DataView from "../components/DataView";
 import config from "../config/config";
+
+const aggregate = strings => {
+  const arr = [];
+  strings.forEach(s => {
+    const found = arr.find(f => f.name === s);
+    if (found) {
+      found.count++;
+    } else {
+      arr.push({ name: s, count: 1 });
+    }
+  });
+  return arr;
+};
 
 const styles = theme => ({
   toolbarIcon: {
@@ -106,6 +121,7 @@ export default withStyles(styles)(
     classes
   }) => {
     const [drawerOpen, setDrawerOpen] = useState(true);
+    const users = [];
 
     return (
       <Row style={{ height: "100%" }}>
@@ -216,11 +232,22 @@ export default withStyles(styles)(
                   path="/admin/orders"
                   render={() => (
                     <DataView
-                      data={catalogItems.map(p => [
-                        p.name,
-                        p.ingredients.join(", ")
+                      data={orders.map(p => [
+                        p.id | "",
+                        format(p.date, "d MMMM yyyy hh:mm", {
+                          locale: itLocale
+                        }),
+                        p.address | "",
+                        aggregate(p.cart.map(p => p.name))
+                          .map(pizza => `${pizza.count}x ${pizza.name}`)
+                          .join(", ")
                       ])}
-                      columns={[{ name: "Nome" }, { name: "Ingredienti" }]}
+                      columns={[
+                        { name: "ID" },
+                        { name: "Data" },
+                        { name: "Indirizzo" },
+                        { name: "Pizze" }
+                      ]}
                     />
                   )}
                 />
@@ -229,11 +256,20 @@ export default withStyles(styles)(
                   path="/admin/clients"
                   render={() => (
                     <DataView
-                      data={catalogItems.map(p => [
-                        p.name,
-                        p.ingredients.join(", ")
+                      data={users.map(p => [
+                        p.Nome,
+                        p.Cognome,
+                        p.Indirizzo,
+                        p.Telefono,
+                        p.Login
                       ])}
-                      columns={[{ name: "Nome" }, { name: "Ingredienti" }]}
+                      columns={[
+                        { name: "Nome" },
+                        { name: "Cognome" },
+                        { name: "Indirizzo" },
+                        { name: "Telefono" },
+                        { name: "Login" }
+                      ]}
                     />
                   )}
                 />

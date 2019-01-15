@@ -3,7 +3,7 @@ import { createMuiTheme } from "@material-ui/core/styles";
 export const globalStyles = {
   "@global": {
     "html, body, #root": {
-      height: "100%",
+      // height: "100%",
       overscrollBehaviorY: "none"
     },
     "#root": {
@@ -17,7 +17,8 @@ export const globalStyles = {
 export const GlobalTheme = createMuiTheme({
   typography: { useNextVariants: true },
   palette: {
-    primary: { main: "rgba(0, 0, 0, 0.87)" }
+    // primary: { main: "rgba(0, 0, 0, 0.87)" }
+    primary: { main: "#700" }
     // type: "dark"
   },
   drawerWidth: 240
