@@ -19,6 +19,16 @@ export const getIngredients = async () => {
   }));
 };
 
+export const getOrders = async token => {
+  const request = await fetch(config.apiUrl + "orders", {
+    headers: {
+      Authorization: "Bearer " + token
+    }
+  });
+  const data = await request.json();
+  return data;
+};
+
 export const order = async ({ Data, Indirizzo, Pizze }, token) =>
   fetch(config.apiUrl + "orders", {
     method: "POST",

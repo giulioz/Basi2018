@@ -33,7 +33,6 @@ export default withStyles(styles)(
     open,
     user,
     onClose,
-    onOrder,
     cart,
     classes
   }) => {

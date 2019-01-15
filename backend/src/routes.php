@@ -111,12 +111,12 @@ $app->get('/orders', function ($request, $response, $args) {
     $user = getUser($request);
 
     if ($user->Amministratore) {
-        $sth = $this->db->prepare("SELECT * FROM Ordini");
+        $sth = $this->db->prepare("SELECT * FROM Ordini o JOIN Ordini_Pizze op ON op.ID_Ordine = o.ID_Ordine");
         $sth->execute();
         $orders = $sth->fetchAll();
         return $this->response->withJson($orders);
     } else if ($user) {
-        $sth = $this->db->prepare("SELECT * FROM Ordini o WHERE o.Utente = :user");
+        $sth = $this->db->prepare("SELECT * FROM Ordini o JOIN Ordini_Pizze op ON op.ID_Ordine = o.ID_Ordine WHERE o.Utente = :user");
         $sth->bindParam("user", $user->Login);
         $sth->execute();
         $orders = $sth->fetchAll();

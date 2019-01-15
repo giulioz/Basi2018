@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   withStyles,
   Card,
@@ -22,19 +22,7 @@ import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import Column from "../components/Column";
 import Row from "../components/Row";
-
-const aggregate = strings => {
-  const arr = [];
-  strings.forEach(s => {
-    const found = arr.find(f => f.name === s);
-    if (found) {
-      found.count++;
-    } else {
-      arr.push({ name: s, count: 1 });
-    }
-  });
-  return arr;
-};
+import { getOrders } from "../api/data";
 
 const styles = theme => ({
   container: {
@@ -55,18 +43,34 @@ const styles = theme => ({
 
 export default withStyles(styles)(
   ({
+    token,
     currentUser,
     setCurrentUser,
     cart,
     setCart,
     catalogItems,
     setCatalogItems,
-    orders,
-    setOrders,
     classes
   }) => {
     const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
     const [toDelete, setToDelete] = useState(null);
+    const [orders, setOrders] = useState([]);
+
+    async function fetchOrders() {
+      setOrders(await getOrders(token));
+    }
+    useEffect(
+      () => {
+        fetchOrders();
+      },
+      [token]
+    );
+
+    const ids = [...new Set(orders.map(p => p.ID_Ordine))];
+    const aggregated = ids.map(o => ({
+      ...orders.filter(p => p.ID_Ordine === o)[0],
+      Pizze: orders.filter(p => p.ID_Ordine === o)
+    }));
 
     const handleDelete = () => {};
 
@@ -109,13 +113,13 @@ export default withStyles(styles)(
             <Typography variant="h4">I tuoi ordini</Typography>
           </Row>
 
-          {orders.map((order, i) => (
+          {aggregated.map((order, i) => (
             <Card className={classes.card}>
               <CardHeader
                 className={classes.cardHeader}
                 title={
                   <Row>
-                    <div style={{ flexGrow: 1 }}>Ordine</div>
+                    <div style={{ flexGrow: 1 }}>Ordine #{order.ID_Ordine}</div>
                     <IconButton
                       color="inherit"
                       onClick={() => {
@@ -127,20 +131,23 @@ export default withStyles(styles)(
                     </IconButton>
                   </Row>
                 }
-                subheader={format(order.date, "d MMMM yyyy", {
+                subheader={format(order.Data, "d MMMM yyyy", {
                   locale: itLocale
                 })}
               />
               <CardContent>
                 <List>
-                  {order.cart &&
-                    aggregate(order.cart.map(p => p.name)).map(pizza => (
-                      <ListItem>
-                        <Typography variant="subtitle1">
-                          {pizza.count}x {pizza.name}
-                        </Typography>
-                      </ListItem>
-                    ))}
+                  {order.Pizze &&
+                    order.Pizze.map(
+                      pizza =>
+                        pizza.Quantita > 0 && (
+                          <ListItem>
+                            <Typography variant="subtitle1">
+                              {pizza.Quantita}x {pizza.NomePizza}
+                            </Typography>
+                          </ListItem>
+                        )
+                    )}
                 </List>
               </CardContent>
             </Card>

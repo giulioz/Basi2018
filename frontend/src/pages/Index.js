@@ -35,8 +35,6 @@ export default withStyles(styles)(
     setCurrentUser,
     cart,
     setCart,
-    orders,
-    setOrders,
     classes
   }) => {
     const [loginOpen, setLoginOpen] = React.useState(false);
@@ -76,11 +74,6 @@ export default withStyles(styles)(
       setLoginOpen(false);
     };
 
-    const handleOrder = order => {
-      setOrders([...orders, { ...order }]);
-      setCart([]);
-    };
-
     const total =
       cart && cart.length > 0
         ? cart.reduce((sf, item) => item.price + sf, 0)
@@ -107,7 +100,6 @@ export default withStyles(styles)(
             setCart={setCart}
             cart={cart}
             onClose={() => setOrderOpen(false)}
-            onOrder={handleOrder}
           />
         </>
 
