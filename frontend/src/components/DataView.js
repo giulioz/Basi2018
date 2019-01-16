@@ -3,7 +3,7 @@ import MUIDataTable from "mui-datatables";
 import { Tooltip, IconButton } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 
-export default ({ data, columns }) => {
+export default ({ data, columns, onAdd }) => {
   const AddButton = () => {
     return (
       <React.Fragment>
@@ -14,7 +14,7 @@ export default ({ data, columns }) => {
           listName={label}
         /> */}
         <Tooltip title={"Aggiungi"}>
-          <IconButton>
+          <IconButton onClick={onAdd}>
             <AddIcon />
           </IconButton>
         </Tooltip>
