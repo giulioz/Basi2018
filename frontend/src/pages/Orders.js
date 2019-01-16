@@ -73,6 +73,7 @@ export default withStyles(styles)(
 
     const handleDelete = () => {
       deleteOrder(toDelete, token);
+      fetchOrders();
       setToDelete(null);
     };
 

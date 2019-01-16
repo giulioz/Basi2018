@@ -160,6 +160,12 @@ $app->delete('/orders/[{id}]', function ($request, $response, $args) {
         $sth->bindParam("id", $args['id']);
         $sth->execute();
         return 200;
+    } else if ($user) {
+        $sth = $this->db->prepare("DELETE o FROM Ordini o WHERE o.Utente = :user AND o.ID_Ordine = :id");
+        $sth->bindParam("user", $user->Login);
+        $sth->bindParam("id", $args['id']);
+        $sth->execute();
+        return 200;
     } else {
         return $response->withStatus(401);
     }
